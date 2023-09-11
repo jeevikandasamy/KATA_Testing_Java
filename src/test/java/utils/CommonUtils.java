@@ -17,4 +17,8 @@ public class CommonUtils {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("arguments[0].scrollIntoView();", element);
     }
+
+    public static void clickOperation(WebElement element){
+        element.click();
+    }
 }
