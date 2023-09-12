@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.BasePage;
 import pages.HomePage;
+import utils.DriversUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -42,13 +43,15 @@ public class BookingSteps extends BasePage {
 
         List<Map<String, String>> roomBookForm = bookingFormDetails.asMaps(String.class, String.class);
 
-        homePage.chooseDates(roomBookForm.get(0).get("bookingstartdate"),
-                roomBookForm.get(0).get("bookingenddate"));
+        for (int j=0; j<roomBookForm.size(); j++) {
+            homePage.chooseDates(roomBookForm.get(j).get("bookingstartdate"),
+                    roomBookForm.get(j).get("bookingenddate"));
 
-        homePage.fillRequiredPersonalInformation(roomBookForm.get(0).get("fname"),
-                roomBookForm.get(0).get("lname"),
-                roomBookForm.get(0).get("email"),
-                roomBookForm.get(0).get("phone"));
+            homePage.fillRequiredPersonalInformation(roomBookForm.get(j).get("fname"),
+                    roomBookForm.get(j).get("lname"),
+                    roomBookForm.get(j).get("email"),
+                    roomBookForm.get(j).get("phone"));
+        }
     }
 
     @Then("I complete booking the room for chosen date")
@@ -61,5 +64,8 @@ public class BookingSteps extends BasePage {
 
     @Then("Verify booking confirmation message and room booked dates")
     public void verify_booking_confirmation_message_and_room_booked_dates() { homePage.verifyBookingConfirmation(); }
+
+    @Then("I close the browser")
+    public void i_close_the_browser() { DriversUtils.tearDown(); }
 
 }
