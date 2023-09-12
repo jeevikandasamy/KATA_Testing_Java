@@ -62,9 +62,6 @@ public class BookingSteps extends BasePage {
     @Then("I verify the confirmation pop up display")
     public void i_verify_the_confirmation_pop_up_display() { homePage.validateConfirmationModalDisplay(); }
 
-    @Then("Verify booking confirmation message and room booked dates")
-    public void verify_booking_confirmation_message_and_room_booked_dates() { homePage.verifyBookingConfirmation(); }
-
     @Then("I close the browser")
     public void i_close_the_browser() { DriversUtils.tearDown(); }
 

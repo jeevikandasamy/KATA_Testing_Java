@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utils.CommonUtils;
+import utils.DriversUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -140,38 +142,25 @@ public class HomePage {
     public void validateConfirmationModalDisplay(){
         try{
             Assert.assertTrue(confirmatiomModal.isDisplayed());
+
+            Assert.assertEquals("Booking Successful!", confirmModalTxt1.getText());
+            Assert.assertEquals("Congratulations! Your booking has been confirmed for:", confirmModalTxt2.getText());
+            Assert.assertTrue(confirmatiomModal.getText().contains(getDateInDisplayFormat(checkInDate)));
+
+            //Confirmation Modal pop up displays different end date so ignoring end date validation
+            //Assert.assertTrue(confirmatiomModal.getText().contains(getDateInDisplayFormat(checkOutDate)));
+            //String roomBookedDates = getDateInDisplayFormat(checkInDate) + " - " + (getDateInDisplayFormat(checkOutDate));
+            //Assert.assertTrue(confirmatiomModal.getText().contains(roomBookedDates));
+
+            clickOperation(confirmModalCloseButton);
         }
         catch(Exception e)
         {
-            e.printStackTrace();
-            System.out.println("Confirmation modal pop up didn't show up!!!");
-        }
-    }
-
-    public void verifyBookingConfirmation() {
-
-        //switch (WebElement)
-
-        try {
-            //if (confirmatiomModal.isDisplayed() || !(assertFailTxt.isDisplayed())) {
-            if (confirmatiomModal.isDisplayed()) {
-
-                Assert.assertEquals("Booking Successful!", confirmModalTxt1.getText());
-                Assert.assertEquals("Congratulations! Your booking has been confirmed for:", confirmModalTxt2.getText());
-                Assert.assertTrue(confirmatiomModal.getText().contains(getDateInDisplayFormat(checkInDate)));
-
-                //Confirmation Modal pop up displays different end date so ignoring end date validation
-                //Assert.assertTrue(confirmatiomModal.getText().contains(getDateInDisplayFormat(checkOutDate)));
-                //String roomBookedDates = getDateInDisplayFormat(checkInDate) + " - " + (getDateInDisplayFormat(checkOutDate));
-                //Assert.assertTrue(confirmatiomModal.getText().contains(roomBookedDates));
-
-                //clickOperation(confirmModalCloseButton);
-
+            //e.printStackTrace();
+            System.out.println("******!!!!Confirmation modal pop up didn't show up!!!******");
+            if(assertFailTxt.isDisplayed()){
+                System.out.println("Room not available for the chosen dates as "+ assertFailTxt.getText());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error while verifying the dates room is booked for!!!");
         }
-
     }
 }

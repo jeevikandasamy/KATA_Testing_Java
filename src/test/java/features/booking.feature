@@ -16,10 +16,9 @@ Then I have the option to book a room
     Then I have the booking form
     Then Fill in the required information to book room
       | fname | lname  | email          | phone       | bookingstartdate | bookingenddate |
-      | test  | test   | test@test.com  |12345678909  | 01               | 03            |
+      | test  | test   | test@test.com  |12345678909  | 05               | 07            |
     Then I complete booking the room for chosen date
     Then I verify the confirmation pop up display
-    Then Verify booking confirmation message and room booked dates
     Then I close the browser
 
 
@@ -35,7 +34,6 @@ Then I have the option to book a room
       | <fname> | <lname> | <email>    | <phone>    | <bookingstartdate> | <bookingenddate> |
     Then I complete booking the room for chosen date
     Then I verify the confirmation pop up display
-    Then Verify booking confirmation message and room booked dates
     Then I close the browser
     Examples:
       | fname | lname  | email          | phone       | bookingstartdate | bookingenddate |
